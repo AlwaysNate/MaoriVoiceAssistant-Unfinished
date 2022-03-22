@@ -4,6 +4,9 @@ import os
 import pyaudio
 import pyttsx3
 import json
+import core
+
+
 engine = pyttsx3.init()
 
 voices = engine.getProperty('voices')
@@ -17,7 +20,7 @@ model = Model("model")
 rec = KaldiRecognizer(model, 16000)
 
 p = pyaudio.PyAudio()
-stream = p.open(format=pyaudio.paInt16, channels=1, rate=16000, input=True, frames_per_buffer=8000)
+stream = p.open(format=pyaudio.paInt16, channels=1, rate=16000, input=True, frames_per_buffer=4000)
 stream.start_stream()
 
 while True:
@@ -31,4 +34,5 @@ while True:
               if result is not None:
                      text = result['text']
                      print(text)
-                     speak(text)
+                     if text == 'que horas são' or text == 'me diga as horas':
+                            speak(core.SystemInfo.get_time())
