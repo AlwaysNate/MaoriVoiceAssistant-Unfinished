@@ -1,5 +1,9 @@
 import yaml
 import numpy as np
+import tensorflow as tf
+from tensorflow.keras.models import Sequential
+from tensorflow.keras.layers import LSTM, Demse
+from tensorflow.keras.utils import to_categorical
 
 data =  yaml.safe_load(open('nlu\\train.yml', 'r', encoding='utf-8').read())
 
@@ -35,7 +39,7 @@ for i, input in enumerate(inputs):
         input_data[i, k, chr2idx[ch]] = 1.0
 
 
-print(input_data[0])
+print(input_data[4])
 
 '''
 print(inputs)
